@@ -1,0 +1,38 @@
+{
+    "1": {
+        "image_name": "QQ浏览器截图20240401213807.png",
+        "ocr_result": "张誉新学习报告本周第3447名已加入628天，连续学习3天学习记录学习统计专栏单课已结束2024年第三届CMAU市策大赛公益培训2024年新三ECAAU中中通国究与商业的利大赛公益培训2024年30月301周六：上午0：00用时18小时43分钟IA+C OA-RNIKNMFERNeIA8直播100%"
+    },
+    "2": {
+        "image_name": "QQ浏览器截图20240401221838.png",
+        "ocr_result": "4 绘制图书管理系统DFD图@"
+    },
+    "3": {
+        "image_name": "QQ浏览器截图20240401222357.png",
+        "ocr_result": "末命名的项目- Visual Paradigm Enterprise(试用版)OXDash项目ITSMAgile图表检视协作工具建模视窗说明导出L日导入新增开启储存关闭打印引用的项目特性CommunityCircle易贸￥图Welcome to Visual Paradigm Enterprise中Enterprise Archt.PM & AgileBusiness DesignCXUXTabularQuality ControlSystem DesignCloud Arch. DesignStrategic AnalysisData VisualizationBlock流程Model Analysis协作Reasons to buy易霓碰斡Pa四Segpot tr PeteSotmt甚韩四iBotyoeg me.tBeraAILIIlClUIEEA Process (Guide-Through / JIT Process / Canvas)EA ModelingCreate architecture views with traceability maintained among views. Manage and access theActionable process map / canvas that guides you through the planning, design and developmentVisualize EA and business processes with ArchiMate and BPMN business process diagrams山views through the grid interface.of EA and business processes.ArchiMate+DoDAFTOGAF ADM Guide-Through Process+BPMN+NAFTOGAF ADM Just-in-Time Process MapMODAFBusiness Process ReengineeringBusiness Motivation ModelStore and share your design on your cloud workspace-习Jump start your design with diagram templatesEnjoy additional features like web diagrams, SWOT, and more..Draw your own diagrams with predefined templates. Hundreds of templates are available. Visit our Community Circle for details.A"
+    },
+    "4": {
+        "image_name": "QQ浏览器截图20240401225328.png",
+        "ocr_result": "（宣传片30s-60s【放一些开会或者经济发展视频，时间轴】《旁白10s(配乐与宣传片一致)自党的二十大以来，中国式现代化’这一宏大概念已深入人心，引领着国家的发展方向（支撑基础总共60-90"
+    },
+    "5": {
+        "image_name": "QQ浏览器截图20240401225447.png",
+        "ocr_result": "【放一-些开会或者经济发展视频时间轴】【旁白】(配乐与宣传片10s一致）自党的二十大以来，“中国式现代化这·宏大概念已深入人心,引领着国家的发展方向"
+    },
+    "6": {
+        "image_name": "QQ浏览器截图20240401225922.png",
+        "ocr_result": "®媒体播放器O中国式现代化0:00:140:00:19片头10S0D二s))9"
+    },
+    "7": {
+        "image_name": "QQ浏览器截图20240401230945.png",
+        "ocr_result": "ClientHealth-CareOrderPharmacistOrganizationDateLicenceNumberNameStartTimeAddressNameEndTimeOrderltemPatientNameDrugltemPackageClient UnitRoomNumberUPCManufacturerChemicalNameNameManufacturerPackageTypeNameUnitTypePackageQuantityAddressAddressFloorUnitDosageBrandNamePriceWingQuantityFrequencyVSpeciallnstructionsPricePatientPrescriptionDrugltemNumberStartDateUnitTypeDrugNameStartTimeUnitDosageChemicaINameDateOfBirthEndDateQuantityOnHandSexEndTimeReorderPointRoomNumberQuantityReorderQuantityFrequencyPriceSpeciallnstructions图1医药销售管理系统E-R图"
+    },
+    "8": {
+        "image_name": "QQ浏览器截图20240401232019.png",
+        "ocr_result": "在您提供的E-R图中，可以看到有几个实体和它们之间的关系：1. Client Health-Care Organization (客户保健组织)：有“Name（名称）\"和“Address （地址）”属性。2. Client Unit(客户单位）：有“Name（名称）”“Address（地址）”“Floor（楼层）“和“Wing(翼）”属性。3. Patient(病人）：有“Number（编号）”“Name（名称）”“DateOfBirth（出生日期）”“Sex(性别)”和“RoomNumber(房间号）”属性。4. Order（订单）：有“Date（日期）”、“StartTime（开始时间)”和“EndTime（结束时间）”属性。5. Orderltem（订单项）：有包括“PatientName（病人姓名）”“RoomNumber（房间号）”“\"ChemicalName（化学品名称）”等多个属性。6. Pharmacist(药剂师）：有“LicenceNumber（执照号码）”和“Name（名称）”属性。7.DrugltemPackage (药品包装）：有“UPC（通用产品代码）”“PackageType（包装类型）”“PackageQuantity(包装数量）”“BrandName（品牌名称）\"和“Price（价格）”属性。8.Manufacturer（生产商）：有“Name（名称）”和“Adress （地址）”属性。9. Prescription(处方）：有“StartDate（开始日期）”“StartTime(开始时间)”“EndDate（结束日期)”“EndTime（结束时间)”、“Quantity(数量）”“Frequency（频率）”和“Speciallnstructions （特别说明）”属性。10. Drugltem(药品项）：有“UnitType（单位类型）”“UnitDosage（单位剂量）”\"QuantityOnHand(手头数量）“ReorderPoint(再订购点）”“ReorderQuantity(再订购数量)“和“Price（价格)”属性。11.Drug(药物）：有“ChemicalName（化学品名称）”属性。"
+    },
+    "9": {
+        "image_name": "QQ浏览器截图20240401232043.png",
+        "ocr_result": "PDF Reader在这个E-R图中，各实体间的关系如下：1. Client Health-Care Organization 和 Client Unit （客户保健组织与客户单位）：·保健组织与客户单位之间的关系可能是一对多，即一个保健组织可能有多个客户单位。2. Client Unit和 Patient（客户单位与病人）：·客户单位与病人之间的关系也是一对多，表示一个客户单位服务于多名病人。3.Patient和 Prescription （病人与处方）：·病人与处方之间的关系是一对多，意味看一名病人可以有多个处方。4.Prescription和 Order（处方与订单）：·处方与订单之间的关系可能是一对一或一对多，具体取决于是否一个处方可以对应多个订单。5.Order和 Orderltem(订单与订单项）：·订单与订单项之间的关系是一对多，一个订单可以包含多个订单项6. Orderltem和 DrugltemPackage(订单项与药品包装）：·订单项与药品包装之间的关系可能是多对多，表明订单项可以包括多个药品包装，而一个药品包装也可以被多个订单项所引用。7. DrugltemPackage和 Manufacturer （药品包装与生产商）：·药品包装与生产商之间的关系可能是多对一，意味着多个药品包装可以由同一生产商提供。8.Order和Pharmacist（订单与药剂师）：·订单与药剂师之间的关系是多对一，表示多个订单可能由同一药剂师处理9. Drugltem和 Drug（药品项与药物）：·药品项与药物之间的关系可能是一对一，增一个药品项对应一种药物。"
+    }
+}

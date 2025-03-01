@@ -1,0 +1,10 @@
+{
+    "task_id": "9ci0bdsyy",
+    "task_type": "OCR任务",
+    "status": "失败",
+    "progress": 0.0,
+    "input_file": "tasks\\input\\9ci0bdsyy.xlsx",
+    "output_file": "tasks\\output\\9ci0bdsyy.xlsx",
+    "other_data": {},
+    "error": "Must have equal len keys and value when setting with an iterable"
+}

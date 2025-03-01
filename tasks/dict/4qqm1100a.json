@@ -1,0 +1,8 @@
+{
+    "task_id": "4qqm1100a",
+    "task_type": "分类任务",
+    "status": "已完成",
+    "progress": 1.0,
+    "input_file": "tasks\\input\\4qqm1100a.xlsx",
+    "output_file": "tasks\\output\\4qqm1100a.xlsx"
+}

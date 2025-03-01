@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>用户数据匹配</title>
+    <!-- 引入 Vue 3 -->
+    <script src="./js/vue.js"></script>
+    <!-- 引入 Element Plus 样式与脚本 -->
+    <link rel="stylesheet" href="./js/index.css">
+    <script src="./js/element.js"></script>
+    <!-- 引入 x-data-spreadsheet 及相关依赖 -->
+    <link rel="stylesheet" href="./js/xspreadsheet.css">
+    <script src="./js/xspreadsheet.js"></script>
+    <script src="./js/xlsx.js"></script>
+    <script src="./js/axios.js"></script>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #toolbar {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        #grid-container {
+            background: #fff;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .el-button {
+            margin-right: 10px;
+        }
+        .tips-container {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .info-icon {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>用户数据匹配</h1>
+        <div id="toolbar">
+            <el-button type="primary" id="downloadFile">导出文件</el-button>
+            <el-button type="success" id="uploadToServer">匹配数据</el-button>
+
+            <!-- 在这里添加提示信息 -->
+            <div class="tips-container">
+                <el-tooltip content="请在A1单元格设置数据源，在B1单元格设置要匹配的数据。有 'code'、'phone'、'intention' 三种格式可选。" placement="right">
+                    <i class="el-icon-info info-icon"></i>
+                </el-tooltip>
+                <el-tag type="success">提示：A列为数据源，B列为匹配内容 先定义两列的列名（可用 'code' 'phone' 'intention','name'(只能放target)） 然后从A2开始填充要查询的数据</el-tag>
+            </div>
+        </div>
+        <div id="grid-container" style="width: 100%; height: 500px;"></div>
+    </div>
+
+    <script>
+      const App = {
+        mounted() {
+            // 初始化 x-spreadsheet 并加载初始数据（已汉化）
+            this.grid = new x_spreadsheet(document.getElementById('grid-container')).loadData({
+                rows: {
+                    0: { cells: { 0: { text: 'code' }, 1: { text: 'phone' } } },
+                }
+            });
+
+            // 给按钮添加事件监听
+            document.getElementById('downloadFile').addEventListener('click', this.downloadFile);
+            document.getElementById('uploadToServer').addEventListener('click', this.uploadToServer);
+        },
+        methods: {
+            gridDataToWorksheet() {
+                const gridData = this.grid.getData();
+                const sheetData = Array.isArray(gridData) ? gridData[0] : gridData;
+
+                if (!sheetData || typeof sheetData !== 'object') {
+                    console.error('无效的表格数据:', sheetData);
+                    throw new Error("表格数据无效或未定义。");
+                }
+
+                if (!sheetData.rows) {
+                    console.error('表格数据中缺少 rows 信息:', sheetData);
+                    throw new Error("表格数据中缺少 rows 信息。");
+                }
+
+                const rows = sheetData.rows;
+                const worksheet = {};
+                const range = { s: { r: 0, c: 0 }, e: { r: 0, c: 0 } };
+
+                Object.keys(rows).forEach((rowIndex) => {
+                    if (rowIndex === 'len') return;
+                    const row = rows[rowIndex];
+                    const cells = row?.cells || {};
+
+                    Object.keys(cells).forEach((colIndex) => {
+                        const cell = cells[colIndex];
+                        if (!cell || !cell.text) return;
+                        const cellRef = XLSX.utils.encode_cell({ r: +rowIndex, c: +colIndex });
+                        worksheet[cellRef] = { v: cell.text };
+                        range.e.r = Math.max(range.e.r, +rowIndex);
+                        range.e.c = Math.max(range.e.c, +colIndex);
+                    });
+                });
+
+                worksheet['!ref'] = XLSX.utils.encode_range(range);
+                return worksheet;
+            },
+            downloadFile() {
+                try {
+                    const worksheet = this.gridDataToWorksheet();
+                    const workbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+                    XLSX.writeFile(workbook, '已编辑文件.xlsx');
+                    ElementPlus.ElNotification({
+                        title: '成功',
+                        message: '文件已成功导出！',
+                        type: 'success'
+                    });
+                } catch (error) {
+                    console.error('导出错误:', error);
+                    ElementPlus.ElNotification({
+                        title: '错误',
+                        message: '生成工作簿失败: ' + error.message,
+                        type: 'error'
+                    });
+                }
+            },
+            async uploadToServer(event) {
+                event.preventDefault();
+                console.log('点击上传按钮');
+
+                try {
+                    const worksheet = this.gridDataToWorksheet();
+                    console.log('生成的Worksheet:', worksheet);
+
+                    const workbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+                    const excelBlob = new Blob([XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })], {
+                        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    });
+
+                    const formData = new FormData();
+                    formData.append('file', new File([excelBlob], '已编辑文件.xlsx'));
+                    console.log('准备的FormData:', formData);
+
+                    // 发送请求到服务器
+                    const response = await axios.post('https://ucsservice.nioint.com/process/', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Accept': 'application/json',
+                        },
+                    });
+
+                    console.log('服务器返回:', response);
+
+                    if (response && response.data) {
+                        this.grid.loadData(response.data);
+                        ElementPlus.ElNotification({
+                            title: '成功',
+                            message: '数据已成功加载至表格！',
+                            type: 'success'
+                        });
+                    } else {
+                        throw new Error('服务器未返回数据。');
+                    }
+                } catch (error) {
+                    console.error('上传错误:', error);
+                    ElementPlus.ElNotification({
+                        title: '错误',
+                        message: '上传数据失败: ' + error.message,
+                        type: 'error'
+                    });
+                }
+            }
+        },
+        data() {
+            return {
+                grid: null
+            }
+        }
+      };
+
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "task_id": "86ijv2d53",
+    "task_type": "分类任务",
+    "status": "已完成",
+    "progress": 1.0,
+    "input_file": "tasks\\input\\86ijv2d53.xlsx",
+    "output_file": "tasks\\output\\86ijv2d53.xlsx",
+    "other_data": {
+        "classifyRequirement": "undefined",
+        "classify_num": "2",
+        "classify_content": "风险倾向,收益预期"
+    }
+}

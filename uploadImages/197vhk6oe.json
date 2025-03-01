@@ -1,0 +1,58 @@
+{
+    "1": {
+        "image_name": "QQ浏览器截图20240401213807.png",
+        "ocr_result": "张誉新学习报告本周第3447名已加入628天，连续学习3天学习记录学习统计专栏单课已结束2024年第三届CMAU市策大赛公益培训2024年新三ECAAU中中通国究与商业的利大赛公益培训2024年30月301周六：上午0：00用时18小时43分钟IA+C OA-RNIKNMFERNeIA8直播100%"
+    },
+    "2": {
+        "image_name": "QQ浏览器截图20240401221838.png",
+        "ocr_result": "4 绘制图书管理系统DFD图@"
+    },
+    "3": {
+        "image_name": "QQ浏览器截图20240401222357.png",
+        "ocr_result": "末命名的项目- Visual Paradigm Enterprise(试用版)OXDash项目ITSMAgile图表检视协作工具建模视窗说明导出L日导入新增开启储存关闭打印引用的项目特性CommunityCircle易贸￥图Welcome to Visual Paradigm Enterprise中Enterprise Archt.PM & AgileBusiness DesignCXUXTabularQuality ControlSystem DesignCloud Arch. DesignStrategic AnalysisData VisualizationBlock流程Model Analysis协作Reasons to buy易霓碰斡Pa四Segpot tr PeteSotmt甚韩四iBotyoeg me.tBeraAILIIlClUIEEA Process (Guide-Through / JIT Process / Canvas)EA ModelingCreate architecture views with traceability maintained among views. Manage and access theActionable process map / canvas that guides you through the planning, design and developmentVisualize EA and business processes with ArchiMate and BPMN business process diagrams山views through the grid interface.of EA and business processes.ArchiMate+DoDAFTOGAF ADM Guide-Through Process+BPMN+NAFTOGAF ADM Just-in-Time Process MapMODAFBusiness Process ReengineeringBusiness Motivation ModelStore and share your design on your cloud workspace-习Jump start your design with diagram templatesEnjoy additional features like web diagrams, SWOT, and more..Draw your own diagrams with predefined templates. Hundreds of templates are available. Visit our Community Circle for details.A"
+    },
+    "4": {
+        "image_name": "QQ浏览器截图20240401225328.png",
+        "ocr_result": "（宣传片30s-60s【放一些开会或者经济发展视频，时间轴】《旁白10s(配乐与宣传片一致)自党的二十大以来，中国式现代化’这一宏大概念已深入人心，引领着国家的发展方向（支撑基础总共60-90"
+    },
+    "5": {
+        "image_name": "QQ浏览器截图20240401225447.png",
+        "ocr_result": "【放一-些开会或者经济发展视频时间轴】【旁白】(配乐与宣传片10s一致）自党的二十大以来，“中国式现代化这·宏大概念已深入人心,引领着国家的发展方向"
+    },
+    "6": {
+        "image_name": "QQ浏览器截图20240401225922.png",
+        "ocr_result": "®媒体播放器O中国式现代化0:00:140:00:19片头10S0D二s))9"
+    },
+    "7": {
+        "image_name": "QQ浏览器截图20240401230945.png",
+        "ocr_result": "ClientHealth-CareOrderPharmacistOrganizationDateLicenceNumberNameStartTimeAddressNameEndTimeOrderltemPatientNameDrugltemPackageClient UnitRoomNumberUPCManufacturerChemicalNameNameManufacturerPackageTypeNameUnitTypePackageQuantityAddressAddressFloorUnitDosageBrandNamePriceWingQuantityFrequencyVSpeciallnstructionsPricePatientPrescriptionDrugltemNumberStartDateUnitTypeDrugNameStartTimeUnitDosageChemicaINameDateOfBirthEndDateQuantityOnHandSexEndTimeReorderPointRoomNumberQuantityReorderQuantityFrequencyPriceSpeciallnstructions图1医药销售管理系统E-R图"
+    },
+    "8": {
+        "image_name": "QQ浏览器截图20240401232019.png",
+        "ocr_result": "在您提供的E-R图中，可以看到有几个实体和它们之间的关系：1. Client Health-Care Organization (客户保健组织)：有“Name（名称）\"和“Address （地址）”属性。2. Client Unit(客户单位）：有“Name（名称）”“Address（地址）”“Floor（楼层）“和“Wing(翼）”属性。3. Patient(病人）：有“Number（编号）”“Name（名称）”“DateOfBirth（出生日期）”“Sex(性别)”和“RoomNumber(房间号）”属性。4. Order（订单）：有“Date（日期）”、“StartTime（开始时间)”和“EndTime（结束时间）”属性。5. Orderltem（订单项）：有包括“PatientName（病人姓名）”“RoomNumber（房间号）”“\"ChemicalName（化学品名称）”等多个属性。6. Pharmacist(药剂师）：有“LicenceNumber（执照号码）”和“Name（名称）”属性。7.DrugltemPackage (药品包装）：有“UPC（通用产品代码）”“PackageType（包装类型）”“PackageQuantity(包装数量）”“BrandName（品牌名称）\"和“Price（价格）”属性。8.Manufacturer（生产商）：有“Name（名称）”和“Adress （地址）”属性。9. Prescription(处方）：有“StartDate（开始日期）”“StartTime(开始时间)”“EndDate（结束日期)”“EndTime（结束时间)”、“Quantity(数量）”“Frequency（频率）”和“Speciallnstructions （特别说明）”属性。10. Drugltem(药品项）：有“UnitType（单位类型）”“UnitDosage（单位剂量）”\"QuantityOnHand(手头数量）“ReorderPoint(再订购点）”“ReorderQuantity(再订购数量)“和“Price（价格)”属性。11.Drug(药物）：有“ChemicalName（化学品名称）”属性。"
+    },
+    "9": {
+        "image_name": "QQ浏览器截图20240401232043.png",
+        "ocr_result": "PDF Reader在这个E-R图中，各实体间的关系如下：1. Client Health-Care Organization 和 Client Unit （客户保健组织与客户单位）：·保健组织与客户单位之间的关系可能是一对多，即一个保健组织可能有多个客户单位。2. Client Unit和 Patient（客户单位与病人）：·客户单位与病人之间的关系也是一对多，表示一个客户单位服务于多名病人。3.Patient和 Prescription （病人与处方）：·病人与处方之间的关系是一对多，意味看一名病人可以有多个处方。4.Prescription和 Order（处方与订单）：·处方与订单之间的关系可能是一对一或一对多，具体取决于是否一个处方可以对应多个订单。5.Order和 Orderltem(订单与订单项）：·订单与订单项之间的关系是一对多，一个订单可以包含多个订单项6. Orderltem和 DrugltemPackage(订单项与药品包装）：·订单项与药品包装之间的关系可能是多对多，表明订单项可以包括多个药品包装，而一个药品包装也可以被多个订单项所引用。7. DrugltemPackage和 Manufacturer （药品包装与生产商）：·药品包装与生产商之间的关系可能是多对一，意味着多个药品包装可以由同一生产商提供。8.Order和Pharmacist（订单与药剂师）：·订单与药剂师之间的关系是多对一，表示多个订单可能由同一药剂师处理9. Drugltem和 Drug（药品项与药物）：·药品项与药物之间的关系可能是一对一，增一个药品项对应一种药物。"
+    },
+    "10": {
+        "image_name": "QQ浏览器截图20240401232157.png",
+        "ocr_result": "口×(宣传片30s-60s放一些开会或者经济发展视频,时间轴旁白10s（配乐与宣传片一致)自党的二十大以来，中国式现代化’这一宏大概念已深入人心，引领着国家的发展方向[支撑基础】总共60-9051份类】习近平同志在党的二十大报告中指出，中国式现代化是人口规模巨大的现代化，是全体人民共同富裕的现代化,是物质文明与精神文明相协调的现代化，是人与自然和谐共生的现代化、浩韩是走和平发展道路的现代化。(指标体系】为了量化中国各省份的中国式现代化发展水平，本项目查询了大量的文献，基于36篇文献构建出包含1个一级指标，5个二级指标和44个三级指标的指标体系。(放文献视频和指标视频)人民t化.平，4个(数据处理】本项目选取了2000年至 2023年除港澳台之外的31个省份和地区的44个三级三级回归指标共计xx条原始数据。(放原始数据）借助python 编写脚本，使用线性插值法和自回归5个粉.为数路式)差分移动平均模型(ARIMA）对缺失值进行了填充处理。使用熵权法（EWM)计算出5个分项指标的得分，再对5个二级指标线性平均得出总得分即中国式现代化发展水平的得分。星度(数据接口】采用MySQL数据库存储处理后的数据，利用node.is 与数据库进行交互，为数据可视化前端页面提供了接口支持。(画数据库与 nodejs数据流，展示json 返回的数据格式)【大屏展示)120s"
+    },
+    "11": {
+        "image_name": "QQ浏览器截图20240401232306.png",
+        "ocr_result": "Order目DateClient Health-care OrganizationPharmacistStartTimeName目LicenceNumber目EndTimeAddress目Name目目Column不DrugltemPackageOrderltem目NPCManufacturer目PatientNamePackageType目NameRoomNumberPackageQuantity>O目AddressClient UnitChemicalNameBrandName目NameManufacturer宜Price言AddressUnitType目FloorUnitDosage目目Wing目QuantityFrequencySpeciallnstructions月PricePatientPrescriptionDrugltem目StartDateUnitType目NumberNameStartTimeUnitDosage目DrugEndDateQuantityOnHandDateOfBirth目ChemicalNameEndTimeReorderPointSex三RoomNumber月QuantityReorderQuantityFrequencyColumn目Price目Column2目Speciallnstructions目"
+    },
+    "12": {
+        "image_name": "QQ浏览器截图20240401234010.png",
+        "ocr_result": "BillInspection resultDPerform InspectionInspectionInspection resultVWork detailD2Work RecordBillPerformCustomerMaintenance/RepainingParts info.VDParts info.PartsInventoryParts info.MechanicsOrder PartsParts info.图2车辆维修系统DFD图"
+    },
+    "13": {
+        "image_name": "QQ浏览器截图20240401234310.png",
+        "ocr_result": "4.用牛羊自图文件大纲该图显示了一个系统如何处理数据以及数据在系统内部如何流动。在这个规图中，我们可以着到以下组件：tn QQ Download1.外部实体：门聚焦西财逐梦财经（第五届”把西财如世界o Customer(客户）：与系统交互,接收账单信息、>a disto Mechanics(机械师）：接收零件信息，参与系统的维修或保养过程。百实验2.md2.处理过程：目数据说明.txto 1Perform Inspection (执行检查）：这是系统的第一个过程，负责对某些事物进行检查，并产生检查结果。o 2 Perform Maintenance/Repairing (执行维护/修理）：这是第二个过程，它接收检查结果，并可能根据需要执行维护或修理工作，这个过程会生成工作细节，并可能需要零件信息。o 3Order Parts（订购零件）：如果在维护或修理过程中需要新的零件，这个过程负责订购零件3.数据存储:o DInspection (检查）:存储检查结果的数据。o D Work Record (工作记录）：存储工作的详细信息。o D Parts Inventory (零件库存）：存储零件信息的库存数据库。4.数据流:o Bill(账单）：从客户流向Perform Inspection过程，然后流向客户，表明检查可能产生费用，费用会通过账单反馈给客户。o Inspection result(检查结果）：从Perform Inspection流向Perform Maintenance/Repairing过程，以及流向lnspection数据存储。o Work detail(工作细节）：从Perform Maintenance/Repairing流向Work Record数据存储。o Parts info.（零件信息）：在Perform Maintenance/Repairing和Order Parts过程之间流动，以及从Order Parts流向PartsInventory数据存储。这个D恩图可能代表一个车辆维修店或者任何需要进行检查、维修和零件更换的服务系统。流程通常开始于客户携带需要检查的项目到服务中心，然后进行如下步骤：1.执行检查，确定需要执行的工作2.根据检查结果，执行必要的维修或保养3.如果需要，订购维修或保养过程中所需的零件。4.将工作细节记录在工作记录中。5.更新零件库存信息，以反映新的库存状况。在整个过程中，客户与系统的交互主要通过账单来体现，账单在检查后产生并最终反馈给客户。这表明客户为检查和随后的服务支付中Y</>费用。机械师可能需要查看零件库存，了解所需零件的信息，以便进行维护或订购。+"
+    },
+    "14": {
+        "image_name": "QQ浏览器截图20241104195032.png",
+        "ocr_result": "校内各单位:为优化虚拟资源使用体验,保障各类应用信息安全,学校云平台扩容服务器已部署完成,现定于2024年10月23日至10月28日对云平台分集群进行扩容升级，届时可能会出现云平台业务短暂中断，具体安排如下：日期时间受影响业务系统10月24日-25日9:00-15: 00OA系统、学生管理系统、人事相关系统10月28日-29日9:00-15: 00统一网站群平台、智慧就业、后勤服务总公司相关业务10月30日-31日9:00-15: 00本科教务系统、财务系统、心理健康管理系统/保卫处相关业务、校友卡、研究生教务系统特此通知"
+    }
+}

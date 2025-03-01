@@ -1,0 +1,9 @@
+{
+    "task_id": "8ou5thcpa",
+    "task_type": "OCR任务",
+    "status": "已完成",
+    "progress": 1.0,
+    "input_file": "tasks\\input\\8ou5thcpa.xlsx",
+    "output_file": "tasks\\output\\8ou5thcpa.xlsx",
+    "other_data": {}
+}

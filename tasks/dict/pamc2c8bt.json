@@ -1,0 +1,9 @@
+{
+    "task_id": "pamc2c8bt",
+    "task_type": "OCR任务",
+    "status": "已完成",
+    "progress": 1.0,
+    "input_file": "tasks\\input\\pamc2c8bt.xlsx",
+    "output_file": "tasks\\output\\pamc2c8bt.xlsx",
+    "other_data": {}
+}
