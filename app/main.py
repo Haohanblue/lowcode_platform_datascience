@@ -15,6 +15,7 @@ from openpyxl.utils import get_column_letter
 import asyncio
 from io import BytesIO
 from contextlib import asynccontextmanager
+from config import ocr_url,local_url
 # 使用生命周期事件处理器
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -80,7 +81,7 @@ async def upload_img(task_id: str = Form(...), seq_id: int = Form(...), file: Up
             with open(task_file_path, "r", encoding='utf-8') as f:
                 task_data = json.load(f)
         # 创建或更新对应顺序id的识别结果
-        url_link = f"http://127.0.0.1:8000/{task_id}/{file.filename}"
+        url_link = f"{local_url}/{task_id}/{file.filename}"
         task_data[str(seq_id)] = {"image_name": file.filename, "ocr_result": url_link}
         # 将更新后的内容写回文件
         with open(task_file_path, "w", encoding='utf-8') as f:
@@ -120,7 +121,7 @@ async def upload_image(task_id: str = Form(...), seq_id: int = Form(...), file: 
         
         # 这里替换为你实际的OCR调用代码
         r = requests.post(
-            'http://127.0.0.1:8501/ocr', files={'image': img_bytes},
+            f'{ocr_url}', files={'image': img_bytes},
         )
         ocr_out = r.json().get('results', [])
         print(ocr_out)
@@ -343,7 +344,7 @@ async def get_ocr_result(req_data: dict):
             print("img_bytes:", len(img_bytes))
             # 这里替换为你实际的OCR调用代码
             r = await httpx.AsyncClient().post(
-                'http://127.0.0.1:8501/ocr', files={'image': img_bytes},
+                f'{ocr_url}', files={'image': img_bytes},
             )
             print("r:", r.json())
             ocr_out = r.json().get('results', [])
@@ -457,7 +458,7 @@ async def get_ocr_formal_result(url_link: str):
     print("img_bytes:", len(img_bytes))
     # 这里替换为你实际的OCR调用代码
     r = await httpx.AsyncClient().post(
-        'http://127.0.0.1:8501/ocr', files={'image': img_bytes},
+        f'{ocr_url}', files={'image': img_bytes},
     )
     print("r:", r.json())
     ocr_out = r.json().get('results', [])
@@ -709,54 +710,6 @@ RESULT_FOLDER = "./results"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
-
-
-
-def connect_mysql():
-    """连接 MySQL 数据库"""
-    engine = create_engine('mysql+pymysql://sa:Datateam.001@10.132.166.96:3306/rawdata')
-    return engine
-
-def query_data(sql):
-    """查询数据"""
-    engine = connect_mysql()
-    try:
-        print("Executing SQL:", sql)
-        with engine.connect() as conn:
-            data = pd.read_sql(sql, conn)
-    except Exception as e:
-        print(f"Error executing SQL: {e}")
-        data = pd.DataFrame()
-    finally:
-        engine.dispose()
-    return data
-
-def define_sql(data):
-    """生成 SQL 查询语句"""
-    origin = data.columns[0]
-    target = data.columns[1]
-    origin_data = [f"'{item}'" for item in data[origin]]
-
-    if origin == 'code' and target == 'phone':
-        sql = f"SELECT `用户 Code`, `手机` FROM leads WHERE `用户 Code` IN ({', '.join(origin_data)}) ORDER BY FIELD(`用户 Code`, {', '.join(origin_data)})"
-    elif origin == 'code' and target == 'name':
-        sql = f"SELECT `用户 Code`, `姓名` FROM leads WHERE `用户 Code` IN ({', '.join(origin_data)}) ORDER BY FIELD(`用户 Code`, {', '.join(origin_data)})"
-    elif origin == 'phone' and target == 'code':
-        sql = f"SELECT `手机`, `用户 Code` FROM leads WHERE `手机` IN ({', '.join(origin_data)}) ORDER BY FIELD(`手机`, {', '.join(origin_data)})"
-    elif origin == 'code' and target == 'intention':
-        sql = f"SELECT `用户 Code`, `意向编号` FROM intention WHERE `用户 Code` IN ({', '.join(origin_data)}) ORDER BY FIELD(`用户 Code`, {', '.join(origin_data)})"
-    elif origin == 'intention' and target == 'code':
-        sql = f"SELECT `意向编号`, `用户 Code` FROM intention WHERE `意向编号` IN ({', '.join(origin_data)}) ORDER BY FIELD(`意向编号`, {', '.join(origin_data)})"
-    elif origin == 'phone' and target == 'intention':
-        sql = f"SELECT `用户手机`, `意向编号` FROM intention WHERE `用户手机` IN ({', '.join(origin_data)}) ORDER BY FIELD(`用户手机`, {', '.join(origin_data)})"
-    elif origin == 'intention' and target == 'phone':
-        sql = f"SELECT `意向编号`, `用户手机` FROM intention WHERE `意向编号` IN ({', '.join(origin_data)}) ORDER BY FIELD(`意向编号`, {', '.join(origin_data)})"
-    else:
-        raise ValueError("Unsupported column mapping")
-
-    return sql
-
-
 
 # 保留主程序运行部分为一个即可
 if __name__ == '__main__':

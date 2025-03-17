@@ -62,18 +62,21 @@
 
       <h1>设置项</h1>
       <!-- 设置项表单 -->
-      <el-form :model="settings" ref="settingsForm">
-        <el-form-item label="每批数据量" :rules="[{ required: true, message: '请输入每批数据量', trigger: 'blur' }]">
-          <el-input-number v-model="settings.limit" :min="1" label="每批数据量"></el-input-number>
+          <el-form>
+        <!-- 加减按钮部分 -->
+        <el-form-item v-if="module === '分类模式'" label="分类管理">
+          <el-button @click="decreaseClassify" :disabled="settings.classifyNum <= 1">-</el-button>
+          <span>{{ settings.classifyNum }}</span>
+          <el-button @click="increaseClassify">+</el-button>
         </el-form-item>
-
-        <el-form-item v-if="module == '分类模式'" label="分类数量" :rules="[{ required: true, message: '请输入分类数量', trigger: 'blur' }]">
-          <el-input-number v-model="settings.classifyNum" :min="1" label="分类数量"></el-input-number>
+        <!-- 动态生成分类标签和解释输入框 -->
+        <el-form-item v-if="module === '分类模式'" v-for="(_, index) in settings.classifyNum" :key="index" :label="'分类标签名 ' + (index + 1)">
+          <el-input v-model="settings.classifyLabels[index]" placeholder="请输入分类标签名"></el-input>
         </el-form-item>
-
-        <el-form-item v-if="module == '分类模式'" label="分类标签名" :rules="[{ required: true, message: '请输入分类标签名', trigger: 'blur' }]">
-          <el-input v-model="settings.classifyContent" placeholder="请输入分类标签，用逗号分隔"></el-input>
+        <el-form-item v-if="module === '分类模式'" v-for="(_, index) in settings.classifyNum" :key="`explain-${index}`" :label="'分类标签解释 ' + (index + 1)">
+          <el-input v-model="settings.classifyExplanations[index]" placeholder="请输入分类标签解释"></el-input>
         </el-form-item>
+      </el-form>
 
         <el-form-item v-if="module == '分类模式'" label="角色">
         <el-input type="textarea" 
@@ -108,7 +111,6 @@
               rows="10"
               readonly></el-input>
     </el-form-item>
-      </el-form>
       <!-- 提示信息 -->
       <div class="tips-container">
         <el-tooltip content="请在A1单元格设置要分类的文本内容，在B1及以后的单元格设置要分类的标签。有 A1必须为'content'。" placement="right">
@@ -170,6 +172,7 @@ import x_spreadsheet from "x-data-spreadsheet";
 import * as XLSX from 'xlsx';
 import "x-data-spreadsheet/dist/xspreadsheet.css";
 import { Delete, Edit, Search, Share, Upload, Setting} from '@element-plus/icons-vue'
+import {BASE_URL} from '../config.ts'
 export default {
   name: 'Home',
   components: {
@@ -195,9 +198,9 @@ export default {
               taskType: 'OCR任务', // 默认选择OCR任务
             },
 
-    selectedFile: null,
-    formRef : null,
-    uploadRef : null,
+      selectedFile: null,
+      formRef : null,
+      uploadRef : null,
       settingsDialogVisible: false,  // 控制设置弹窗的显示与隐藏
       module: '分类模式',
       showProgress: false,
@@ -205,8 +208,9 @@ export default {
       progressPercentage: 0,
       settings: {
         limit: 20,  // 默认每批数据量
-        classifyNum: 2,  // 默认分类数量
-        classifyContent: '风险倾向,收益预期',  // 默认分类标签
+        classifyNum: 2, // 默认分类数量
+        classifyLabels: ['风险倾向', '收益预期'], // 默认分类标签
+        classifyExplanations: ['', ''], // 初始分类标签解释,
         classifyRole: '你是一位专业的金融行为分析师。请仔细分析以下投资者的社交媒体发言，判断该发言是否表现出投资者倾向于追求高风险-高回报的"彩票式股票"投资特征。',  // 默认分类角色
         classifyGoal: ` 请逐步分析以下要素：
         1. 风险认知指标：
@@ -266,10 +270,22 @@ export default {
       console.log('打开任务状态对话框');
      
     },
+    increaseClassify() {
+      this.settings.classifyNum++;
+      this.settings.classifyLabels.push('');
+      this.settings.classifyExplanations.push('');
+    },
+    decreaseClassify() {
+      if (this.settings.classifyNum > 1) {
+        this.settings.classifyNum--;
+        this.settings.classifyLabels.pop();
+        this.settings.classifyExplanations.pop();
+      }
+    },
     async fetchTasks() {
       try {
 
-        const response = await axios.get(`http://127.0.0.1:8000/task-status/${this.searchTaskId}`);
+        const response = await axios.get(`${BASE_URL}/task-status/${this.searchTaskId}`);
         /// response.data是一个对象，包含了任务的状态信息，但是tasks是一个数组，所以需要将response.data转换为数组
         this.tasks = [response.data];
         console.log('任务数据:', this.tasks);
@@ -279,7 +295,7 @@ export default {
     },
     handleDownload(taskId) {
     // 方式1：直接打开新窗口（推荐）
-    window.open(`http://127.0.0.1:8000/download_done_task/${taskId}`, '_blank');
+    window.open(`${BASE_URL}/download_done_task/${taskId}`, '_blank');
     
     // 方式2：使用axios（需要处理blob数据）
     /* axios.get(`/api/download/${taskId}`, { responseType: 'blob' })
@@ -379,10 +395,10 @@ export default {
       formData.append('file', this.form.file.raw);
       formData.append('template', this.settings.classifyRequirement);
       formData.append('classify_num', this.settings.classifyNum);
-      formData.append('classify_content', this.settings.classifyContent);
+      formData.append('classify_content', this.settings.classifyContentclassifyLabels);
       console.log('formData:', formData);
       try {
-        const response = await axios.post('http://127.0.0.1:8000/start-task', formData, {
+        const response = await axios.post(`${BASE_URL}/start-task`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -421,12 +437,12 @@ export default {
           // Ensure grid is loaded and valid
     const s = this.grid;  // Assuming this.grid is the Spreadsheet instance
     // 更新第一行，从第二列开始填充 classify_content 中的元素
-    const classifyContentArray_list = this.settings.classifyContent.split(',');
+    const classifyContentArray_list = this.settings.classifyContentclassifyLabels;
     classifyContentArray_list.forEach((content, index) => {
       s.cellText(0, index + 1, null);  // 第0行是表头，index+1是列索引
     });
     const classifyContentArray = ["图片URL","OCR结果"];
-    console.log('分类标签:', this.settings.classifyContent);
+    console.log('分类标签:', this.settings.classifyContentclassifyLabels);
     classifyContentArray.forEach((content, index) => {
       s.cellText(0, index, content);  // 第0行是表头，index+1是列索引
     });
@@ -438,8 +454,8 @@ export default {
           // Ensure grid is loaded and valid
     const s = this.grid;  // Assuming this.grid is the Spreadsheet instance
     // 更新第一行，从第二列开始填充 classify_content 中的元素
-    const classifyContentArray = this.settings.classifyContent.split(',');
-    console.log('分类标签:', this.settings.classifyContent);
+    const classifyContentArray = this.settings.classifyContentclassifyLabels;
+    console.log('分类标签:', this.settings.classifyContentclassifyLabels);
     s.cellText(0, 0, "分类问题");
     classifyContentArray.forEach((content, index) => {
       s.cellText(0, index + 1, content);  // 第0行是表头，index+1是列索引
@@ -461,8 +477,8 @@ export default {
     // Ensure grid is loaded and valid
     const s = this.grid;  // Assuming this.grid is the Spreadsheet instance
     // 更新第一行，从第二列开始填充 classify_content 中的元素
-    const classifyContentArray = this.settings.classifyContent.split(',');
-    console.log('分类标签:', this.settings.classifyContent);
+    const classifyContentArray = this.settings.classifyContentclassifyLabels;
+    console.log('分类标签:', this.settings.classifyContentclassifyLabels);
     classifyContentArray.forEach((content, index) => {
       s.cellText(0, index + 1, content);  // 第0行是表头，index+1是列索引
     });
@@ -489,7 +505,7 @@ export default {
     let offset = 0;
     const limit = this.settings.limit || 20;  // 每批上传的最大数据量
     const totalNum = questionList.length;
-    const classifyContent = this.settings.classifyContent.split(',');
+    const classifyContent = this.settings.classifyContentclassifyLabels;
 
     // 分批次上传
     while (offset < totalNum) {
@@ -508,7 +524,7 @@ export default {
       console.log('准备的请求数据:', reqData);
 
       // Send the request to the server
-      const response = await axios.post('http://localhost:8000/get_classify_result/', reqData, {
+      const response = await axios.post(`${BASE_URL}/get_classify_result/`, reqData, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -594,7 +610,7 @@ async ocrToServer(event) {
     let offset = 0;
     const limit = this.settings.limit || 20;  // 每批上传的最大数据量
     const totalNum = questionList.length;
-    const classifyContent = this.settings.classifyContent.split(',');
+    const classifyContent = this.settings.classifyContentclassifyLabels;
 
     // 分批次上传
     while (offset < totalNum) {
@@ -610,7 +626,7 @@ async ocrToServer(event) {
       console.log('准备的请求数据:', reqData);
 
       // Send the request to the server
-      const response = await axios.post('http://localhost:8000/get_ocr_result/', reqData, {
+      const response = await axios.post(`${BASE_URL}/get_ocr_result/`, reqData, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

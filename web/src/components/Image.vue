@@ -78,11 +78,11 @@ import { UploadFilled } from '@element-plus/icons-vue';
 import axios from "axios";
 import { ElMessage } from 'element-plus';  // 引入 Element Plus 的消息提示组件
 import * as XLSX from 'xlsx';  // 引入 xlsx 库
+import { BASE_URL } from "../config";
+const uploadUrl = `${BASE_URL}/upload/`;
+const downloadUrl = `${BASE_URL}/download/`;
 
-const uploadUrl = "http://127.0.0.1:8000/upload/";
-const downloadUrl = "http://127.0.0.1:8000/download/";
-
-const get_img_url = "http://127.0.0.1:8000/upload_image/"
+const get_img_url = `${BASE_URL}/upload_image/`
 
 const selectedFiles = ref([]);  // 存储选择的文件
 const error = ref(null);  // 存储错误信息
